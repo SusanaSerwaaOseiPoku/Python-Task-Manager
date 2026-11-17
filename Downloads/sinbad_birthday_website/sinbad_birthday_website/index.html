@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e9a16e">
+<title>Happy Birthday, Sinbad</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+:root{color-scheme:light;--ink:#33211d;--paper:#fff4e6;--rust:#9b4938;--orange:#e9a16e}
+*{box-sizing:border-box}
+html,body{min-height:100%;margin:0}
+body{background:#171717;color:var(--ink);font-family:'DM Sans',sans-serif}
+button{font:inherit}
+.page{position:relative;width:min(100%,760px);min-height:100svh;margin:auto;overflow:hidden;background:var(--orange);box-shadow:0 20px 90px #0003}
+.top{height:68px;padding:0 clamp(22px,6vw,55px);display:flex;align-items:center;justify-content:space-between;background:var(--paper)}
+.brand{font:700 18px 'Playfair Display',serif;letter-spacing:-.04em}.brand span{color:var(--rust)}
+.pill{border:1px solid #33211d55;border-radius:30px;padding:8px 13px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.greeting{min-height:calc(100svh - 68px);padding:24px clamp(22px,7vw,65px) 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.72}
+h1{font:800 clamp(48px,10vw,76px)/.98 'Playfair Display',serif;letter-spacing:-.065em;margin:15px 0 12px}
+.sub{flex:none;font-size:14px;line-height:1.65;max-width:440px;margin:0 auto 34px;opacity:.82}
+.visual{flex:none;width:min(100%,460px);height:clamp(205px,34svh,290px);position:relative;display:grid;place-items:center;margin:0 auto}
+.disc{position:absolute;width:min(64vw,250px);aspect-ratio:1;border-radius:50%;background:#fff1d6a8}
+.birthday-cat{position:relative;z-index:2;font-size:clamp(110px,27vw,148px);filter:drop-shadow(0 15px 8px #4b281c30);transform:translateY(-13px)}
+.cake{position:absolute;z-index:3;bottom:15px;width:min(55vw,200px);height:58px;border-radius:10px 10px 18px 18px;background:linear-gradient(to bottom,#f7e9c8 0 12%,#fff5dc 13% 19%,#f2dfb5 20% 72%,#d99851 73% 88%,#ad673a 89%);box-shadow:0 4px 0 #9c5e37,0 12px 18px #4b281c24}
+.cake:before{content:"";position:absolute;left:-5px;top:-13px;width:calc(100% + 10px);height:26px;border-radius:50%;background:#fff4d8;box-shadow:inset 0 -3px 0 #ead9b5}
+.cake:after{content:"";position:absolute;z-index:2;left:50%;top:-7px;width:66px;height:14px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 17% 55%,#d94f4d 0 5px,transparent 5.5px),radial-gradient(circle at 39% 40%,#e86d61 0 5px,transparent 5.5px),radial-gradient(circle at 61% 40%,#d94f4d 0 5px,transparent 5.5px),radial-gradient(circle at 83% 55%,#e86d61 0 5px,transparent 5.5px)}
+.candle{position:absolute;z-index:4;bottom:85px;width:7px;height:29px;border-radius:3px;background:repeating-linear-gradient(135deg,#fff 0 5px,#e36e5d 5px 9px)}
+.flame{position:absolute;z-index:5;bottom:113px;width:10px;height:15px;border-radius:80% 0 80% 80%;transform:rotate(45deg);background:#ffbd4d;box-shadow:0 0 13px #ffca67}
+.spark{position:absolute;font-size:24px;color:#fff2d8;animation:float 3s ease-in-out infinite}
+.spark-a{top:12%;left:10%}.spark-b{right:9%;top:23%;animation-delay:.8s}.spark-c{bottom:15%;left:13%;animation-delay:1.4s}.spark-d{right:14%;bottom:21%;animation-delay:1s}
+@keyframes float{50%{transform:translateY(-12px) rotate(18deg)}}
+.hold-area{width:min(100%,350px);margin-top:22px}
+.hold{width:100%;height:62px;border:0;border-radius:40px;background:#34221d;color:#fff3e5;position:relative;overflow:hidden;touch-action:none;cursor:pointer;font-weight:700;font-size:11px;letter-spacing:.12em}
+.hold:focus-visible,.gift:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.progress{position:absolute;inset:0 auto 0 0;width:0;background:#bd7050}
+.hold span{position:relative;z-index:1}
+.hint{font-size:9px;letter-spacing:.15em;text-transform:uppercase;opacity:.68;margin-top:12px}
+.reveal-screen{display:none;position:absolute;inset:0;z-index:10;min-height:100%;overflow:auto;background:var(--paper);padding:28px 22px;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.reveal-screen.show{display:flex;animation:appear .55s ease both}
+@keyframes appear{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+.gift-intro{font:800 clamp(34px,8vw,52px)/1 'Playfair Display',serif;letter-spacing:-.05em;color:var(--rust);margin:12px 0}
+.gift-instruction{max-width:320px;font-size:14px;line-height:1.6;margin:0}
+.gift{position:relative;width:190px;height:180px;border:0;background:none;margin:17px 0 8px;cursor:pointer;touch-action:manipulation;transition:transform .18s}
+.gift:hover{transform:translateY(-3px)}
+.gift:active{transform:scale(.95)}
+.gift-box{position:absolute;left:25px;right:25px;bottom:10px;height:105px;border:4px solid #9b4938;border-radius:8px 8px 17px 17px;background:#e88e78;box-shadow:inset 0 -12px #d77965}
+.gift-lid{position:absolute;left:16px;right:16px;bottom:105px;height:30px;border:4px solid #9b4938;border-radius:8px;background:#efac76;transform:rotate(-3deg);transition:transform .35s,bottom .35s}
+.gift-ribbon{position:absolute;left:50%;top:0;bottom:0;width:22px;transform:translateX(-50%);background:#f2bc4e;border-left:3px solid #9b4938;border-right:3px solid #9b4938}
+.gift-bow{position:absolute;left:50%;bottom:128px;width:68px;height:38px;transform:translateX(-50%)}
+.gift-bow:before,.gift-bow:after{content:"";position:absolute;width:34px;height:25px;border:4px solid #9b4938;background:#f2bc4e;border-radius:80% 15% 80% 15%}
+.gift-bow:before{left:0;transform:rotate(18deg)}.gift-bow:after{right:0;transform:scaleX(-1) rotate(18deg)}
+.gift-count{font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.7;margin:4px 0 12px}
+.cat-reveal{display:none;flex-direction:column;align-items:center;animation:appear .5s ease both}
+.cat-reveal.show{display:flex}
+.reveal-cat{width:clamp(190px,42vw,280px);height:auto;max-height:38svh;overflow:visible;flex:none;animation:bounce 1.2s ease-in-out infinite alternate}
+@keyframes bounce{to{transform:translateY(-8px) rotate(2deg)}}
+.cat-reveal h2{font:800 clamp(42px,9vw,66px)/1 'Playfair Display',serif;letter-spacing:-.06em;color:var(--rust);margin:9px 0}
+.cat-reveal p{font:600 clamp(18px,4vw,22px)/1.45 'Playfair Display',serif;margin:3px 0}
+.birthday-wish{font:400 14px/1.6 'DM Sans',sans-serif!important;opacity:.72;margin-top:14px!important}
+.paw{font-size:23px;letter-spacing:9px;margin-top:12px}
+.confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.confetti-piece{position:absolute;left:var(--x);top:-12px;width:var(--size);height:calc(var(--size)*1.45);border-radius:2px;background:var(--color);opacity:0;animation:confetti-fall var(--duration) var(--delay) cubic-bezier(.15,.55,.3,1) forwards}
+@keyframes confetti-fall{0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}10%{opacity:1}100%{transform:translate3d(var(--drift),110vh,0) rotate(760deg);opacity:.9}}
+@media(max-height:650px){.greeting{min-height:auto;padding-top:20px;padding-bottom:24px}.visual{height:200px}h1{font-size:clamp(42px,8vw,58px)}.reveal-cat{width:155px;max-height:25svh}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<main class="page" id="page">
+<header class="top">
+  <div class="brand">A day for <span>Sinbad</span></div>
+  <div class="pill">Birthday edition</div>
+</header>
+
+<section class="greeting" aria-labelledby="heading">
+  <h1 id="heading">Happy Birthday,<br>Sinbad!</h1>
+  <p class="sub">Hope you enjoy today even more than you will your 19th!</p>
+  <div class="visual" aria-hidden="true">
+    <div class="disc"></div><span class="spark spark-a">✦</span><span class="spark spark-b">✧</span><span class="spark spark-c">✦</span><span class="spark spark-d">✧</span>
+    <div class="birthday-cat">🐱</div><div class="cake"></div>
+    <div class="candle" style="left:40%"></div><div class="flame" style="left:39.7%"></div>
+    <div class="candle" style="left:49%"></div><div class="flame" style="left:48.7%"></div>
+    <div class="candle" style="left:58%"></div><div class="flame" style="left:57.7%"></div>
+  </div>
+  <div class="hold-area">
+    <button class="hold" id="hold" aria-label="Press and hold to reveal the gift" aria-describedby="hold-hint">
+      <div class="progress" id="progress" aria-hidden="true"></div><span>HOLD TO REVEAL GIFT</span>
+    </button>
+    <div class="hint" id="hold-hint">Keep holding to open your gift</div>
+  </div>
+</section>
+
+<section class="reveal-screen" id="reveal" aria-label="Sinbad's birthday gift" aria-hidden="true">
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <div class="gift-stage" id="gift-stage">
+    <div class="eyebrow">A surprise for you</div>
+    <h2 class="gift-intro">A gift for Sinbad</h2>
+    <p class="gift-instruction">Your present is a little shy. Tap the gift twice to meet your new friend.</p>
+    <button class="gift" id="gift" aria-label="Tap the gift twice to open it">
+      <span class="gift-bow" aria-hidden="true"></span>
+      <span class="gift-lid" aria-hidden="true"><span class="gift-ribbon"></span></span>
+      <span class="gift-box" aria-hidden="true"><span class="gift-ribbon"></span></span>
+    </button>
+    <div class="gift-count" id="gift-count" aria-live="polite">2 taps to open</div>
+  </div>
+  <div class="cat-reveal" id="cat-reveal" aria-hidden="true">
+    <svg class="reveal-cat" viewBox="0 0 240 220" role="img" aria-label="Jared, a cute orange cat">
+      <ellipse cx="120" cy="199" rx="72" ry="12" fill="#e8d8c6"/>
+      <path d="M66 149c-20-10-28-28-18-46 6-12 18-17 30-15 10-22 31-36 56-36 26 0 47 14 57 36 13-2 26 5 30 18 7 19-4 36-22 44-5 24-28 41-67 41-38 0-61-17-66-42z" fill="#e99a61"/>
+      <path d="M69 91 61 43l42 25M170 68l42-25-8 49" fill="#e99a61" stroke="#9b4938" stroke-width="5" stroke-linejoin="round"/>
+      <path d="m72 77-4-22 21 13m68 0 21-13-4 22" fill="#f3b4a3"/>
+      <ellipse cx="94" cy="111" rx="7" ry="10" fill="#33211d"/><ellipse cx="147" cy="111" rx="7" ry="10" fill="#33211d"/>
+      <path d="M116 123q4-5 8 0-4 8-8 0zm4 8q-8 10-15 2m15-2q8 10 15 2" fill="none" stroke="#33211d" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="78" cy="127" rx="12" ry="7" fill="#ed7775" opacity=".8"/><ellipse cx="162" cy="127" rx="12" ry="7" fill="#ed7775" opacity=".8"/>
+      <path d="M116 169q4-10 8 0l19 11q-22 15-46 0z" fill="#fff0d7" stroke="#9b4938" stroke-width="3"/>
+      <path d="M51 144 25 139m27 16-28 3m164-14 27-5m-26 16 28 3" stroke="#9b4938" stroke-width="3" stroke-linecap="round"/>
+      <path d="M183 167c31-3 42 17 26 28-8 5-17 2-17-5 0-5 6-8 10-4" fill="none" stroke="#9b4938" stroke-width="7" stroke-linecap="round"/>
+      <path d="M109 73q11 13 22 0" fill="none" stroke="#bd7050" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <h2 tabindex="-1">Meet Jared!</h2>
+    <p>Your new virtual pet.</p>
+    <div class="paw" aria-hidden="true">🐾 ✦ 🐾</div>
+  </div>
+</section>
+</main>
+<script>
+const hold=document.getElementById('hold');
+const bar=document.getElementById('progress');
+const reveal=document.getElementById('reveal');
+const hint=document.getElementById('hold-hint');
+const gift=document.getElementById('gift');
+const giftStage=document.getElementById('gift-stage');
+const giftCount=document.getElementById('gift-count');
+const catReveal=document.getElementById('cat-reveal');
+const confetti=document.getElementById('confetti');
+let startedAt=0,holdTimer=0,done=false,holding=false,giftTaps=0,audioContext=null;
+const holdDuration=1600;
+
+function prepareAudio(){
+  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+  if(!AudioContextClass)return;
+  try{
+    audioContext=audioContext||new AudioContextClass();
+    if(audioContext.state!=='running')audioContext.resume().catch(error=>console.error('Could not resume birthday audio:',error));
+  }catch(error){console.error('Could not prepare birthday audio:',error)}
+}
+function playBirthdayTune(){
+  if(!audioContext)return;
+  const notes=[392,392,440,392,523,494,392,392,440,392,587,523,392,392,784,659,523,494,440,698,698,659,523,587,523];
+  const longAfter=new Set([5,11,18]);
+  const play=()=>{
+    let time=audioContext.currentTime+.08;
+    notes.forEach((frequency,index)=>{
+      const oscillator=audioContext.createOscillator();
+      const gain=audioContext.createGain();
+      oscillator.type='sine';
+      oscillator.frequency.value=frequency;
+      gain.gain.setValueAtTime(.0001,time);
+      gain.gain.exponentialRampToValueAtTime(.13,time+.025);
+      gain.gain.exponentialRampToValueAtTime(.0001,time+.27);
+      oscillator.connect(gain);gain.connect(audioContext.destination);
+      oscillator.start(time);oscillator.stop(time+.29);
+      time+=longAfter.has(index)?.42:.3;
+    });
+  };
+  if(audioContext.state==='running')play();
+  else audioContext.resume().then(play).catch(error=>console.error('Could not play birthday audio:',error));
+}
+function addConfetti(){
+  const colors=['#e97e64','#f2bc4e','#82a77a','#9b6fc1','#ef9fbd','#fff1d6'];
+  const pieces=document.createDocumentFragment();
+  for(let i=0;i<42;i++){
+    const piece=document.createElement('i');
+    piece.className='confetti-piece';
+    piece.style.setProperty('--x',`${Math.random()*100}%`);
+    piece.style.setProperty('--size',`${6+Math.random()*7}px`);
+    piece.style.setProperty('--color',colors[i%colors.length]);
+    piece.style.setProperty('--delay',`${Math.random()*.65}s`);
+    piece.style.setProperty('--duration',`${2.4+Math.random()*1.7}s`);
+    piece.style.setProperty('--drift',`${Math.random()*180-90}px`);
+    pieces.append(piece);
+  }
+  confetti.replaceChildren(pieces);
+}
+function finishHold(){
+  done=true;holding=false;
+  hold.setAttribute('aria-pressed','true');
+  reveal.classList.add('show');
+  reveal.setAttribute('aria-hidden','false');
+  playBirthdayTune();
+  gift.focus({preventScroll:true});
+}
+function updateHold(){
+  if(!holding||done)return;
+  const amount=Math.min((performance.now()-startedAt)/holdDuration,1);
+  bar.style.width=`${amount*100}%`;
+  if(amount>=1){clearInterval(holdTimer);finishHold()}
+}
+function beginHold(){
+  if(done||holding)return;
+  holding=true;startedAt=performance.now();
+  prepareAudio();
+  updateHold();
+  holdTimer=setInterval(updateHold,50);
+}
+function resetHold(){
+  if(done||!holding)return;
+  holding=false;startedAt=0;
+  clearInterval(holdTimer);
+  bar.style.width='0%';
+}
+hold.addEventListener('pointerdown',event=>{
+  if(done)return;
+  event.preventDefault();
+  hold.setPointerCapture(event.pointerId);
+  beginHold();
+});
+hold.addEventListener('pointerup',resetHold);
+hold.addEventListener('pointercancel',resetHold);
+hold.addEventListener('lostpointercapture',resetHold);
+hold.addEventListener('keydown',event=>{
+  if((event.code==='Space'||event.code==='Enter')&&!event.repeat){event.preventDefault();beginHold()}
+});
+hold.addEventListener('keyup',event=>{
+  if(event.code==='Space'||event.code==='Enter')resetHold();
+});
+hold.addEventListener('blur',resetHold);
+gift.addEventListener('click',()=>{
+  if(giftTaps>=2)return;
+  giftTaps++;
+  giftCount.textContent=giftTaps===1?'One more tap!':'';
+  if(giftTaps===1){
+    gift.classList.add('opened');
+    gift.querySelector('.gift-lid').style.transform='translateY(-20px) rotate(-12deg)';
+  }
+  if(giftTaps===2){
+    giftStage.hidden=true;
+    catReveal.classList.add('show');
+    catReveal.setAttribute('aria-hidden','false');
+    addConfetti();
+    document.querySelector('#cat-reveal h2').focus({preventScroll:true});
+  }
+});
+</script>
+</body>
+</html>
